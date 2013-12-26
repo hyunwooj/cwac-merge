@@ -392,6 +392,18 @@ public class MergeAdapter extends BaseAdapter implements SectionIndexer {
     return(pieces.getPieces());
   }
 
+
+  public int getRelativePosition(int position) {
+    for(PieceState piece : pieces.getRawPieces()) {
+      int itemCount = piece.adapter.getCount();
+      if(position < itemCount) {
+        return position;
+      }
+      position -= itemCount;
+    }
+    return -1;
+  }
+
   private static class PieceState {
     ListAdapter adapter;
     boolean isActive=true;
